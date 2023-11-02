@@ -13,7 +13,7 @@
 
 Перейдите в каталог проекта:
 ```sh
-cd star-burger
+cd quiz-bot
 ```
 
 [Установите Python](https://www.python.org/), если этого ещё не сделали.
