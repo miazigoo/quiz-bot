@@ -1,6 +1,8 @@
 ## Bot "Quiz"
 
 ### Бот для викторин в "Telegram" и "VK"
+- Telegram - [@test_python_zeder_bot](https://t.me/test_python_zeder_bot)
+- VK - [test bot](https://vk.com/club219710754)
 
 
  
@@ -9,8 +11,32 @@
 
 * Скачать [этот script](https://github.com/miazigoo/quiz-bot.git)
 
-**Python3 уже должен быть установлен**. 
-Используйте `pip` (или `pip3`, если возникает конфликт с Python2) для установки зависимостей:
+Перейдите в каталог проекта:
+```sh
+cd star-burger
+```
+
+[Установите Python](https://www.python.org/), если этого ещё не сделали.
+
+Проверьте, что `python` установлен и корректно настроен. Запустите его в командной строке:
+```sh
+python --version
+```
+**Важно!** Версия Python должна быть не ниже 3.6.
+
+Возможно, вместо команды `python` здесь и в остальных инструкциях этого README придётся использовать `python3`. Зависит это от операционной системы и от того, установлен ли у вас Python старой второй версии.
+
+В каталоге проекта создайте виртуальное окружение:
+```sh
+python -m venv venv
+```
+Активируйте его. На разных операционных системах это делается разными командами:
+
+- Windows: `.\venv\Scripts\activate`
+- MacOS/Linux: `source venv/bin/activate`
+
+
+Установите зависимости в виртуальное окружение:
 ```sh
 pip install -r requirements.txt
 ```
