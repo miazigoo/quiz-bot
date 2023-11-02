@@ -1,30 +1,14 @@
 import logging
 
-from aiogram import Bot, types, Dispatcher, F
+from aiogram import Bot, Dispatcher
 import asyncio
 
-from aiogram.filters import Command
+from aiogram.fsm.storage.memory import MemoryStorage
 from environs import Env
 
+from handlers import tg_common, tg_quiz
 
 logger = logging.getLogger(__name__)
-
-dp = Dispatcher()
-
-
-@dp.message(Command("start"))
-async def process_start_command(message: types.Message):
-    await message.reply("Привет!\nНапиши мне что-нибудь!")
-
-
-@dp.message(Command('help'))
-async def process_help_command(message: types.Message):
-    await message.reply("Напиши мне что-нибудь, и я отпрпавлю этот текст тебе в ответ!")
-
-
-@dp.message(F.text)
-async def echo_message(msg: types.Message):
-    await msg.bot.send_message(msg.from_user.id, msg.text)
 
 
 async def main():
@@ -36,9 +20,12 @@ async def main():
 
     tg_token = env.str("TGTOKEN")
     admin_id = env.str('TELEGRAM_ADMIN_ID')
-
+    dp = Dispatcher(storage=MemoryStorage())
     bot = Bot(token=tg_token)
+    dp.include_router(tg_common.router)
+    dp.include_router(tg_quiz.router)
     logger.info('Telegram bot started')
+
     await bot.send_message(admin_id, 'Telegram bot started')
     await dp.start_polling(bot)
 
