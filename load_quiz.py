@@ -1,12 +1,9 @@
 import os
 import re
-from environs import Env
 
 
 def load_books():
-    env = Env()
-    env.read_env()
-    questions_folder = env.str('QUESTIONS_FOLDER', 'quiz')
+    questions_folder = os.getenv('QUESTIONS_FOLDER', default='quiz')
     books = []
     for file_name in os.listdir(questions_folder):
         book = []

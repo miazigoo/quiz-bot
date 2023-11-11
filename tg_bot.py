@@ -1,10 +1,11 @@
 import logging
+import os
 
 from aiogram import Bot, Dispatcher
 import asyncio
 
 from aiogram.fsm.storage.memory import MemoryStorage
-from environs import Env
+from dotenv import load_dotenv
 
 from handlers import tg_common, tg_quiz
 
@@ -15,11 +16,10 @@ async def main():
     logging.basicConfig(
         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
     )
-    env = Env()
-    env.read_env()
+    load_dotenv()
 
-    tg_token = env.str("TGTOKEN")
-    admin_id = env.str('TELEGRAM_ADMIN_ID')
+    tg_token = os.getenv("TGTOKEN")
+    admin_id = os.getenv('TELEGRAM_ADMIN_ID')
     dp = Dispatcher(storage=MemoryStorage())
     bot = Bot(token=tg_token)
     dp.include_router(tg_common.router)

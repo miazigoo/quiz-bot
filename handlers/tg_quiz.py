@@ -5,11 +5,9 @@ from aiogram.types import Message
 
 from keyboards.tg_keyboards import start_keyboard
 from load_quiz import load_books
-from redis_connection import get_redis_connection
+from redis_connection import redis_connect
 
 router = Router()
-
-redis_connect = get_redis_connection()
 
 BOOKS = load_books()
 

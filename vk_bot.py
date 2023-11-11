@@ -1,12 +1,13 @@
 import logging
+import os
 
 import vk_api
-from environs import Env
+from dotenv import load_dotenv
 from vk_api.longpoll import VkLongPoll, VkEventType
 
 from handlers.vk_quiz import handle_new_question, handle_give_up, handle_solution_attempt, handle_my_account
 from load_quiz import load_books
-from redis_connection import get_redis_connection
+from redis_connection import redis_connect
 
 logger = logging.getLogger(__name__)
 
@@ -15,15 +16,12 @@ def main():
     logging.basicConfig(
         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
     )
-    env = Env()
-    env.read_env()
-
-    vk_api_key = env.str("VK_API_KEY")
+    load_dotenv()
+    vk_api_key = os.getenv("VK_API_KEY")
     vk_session = vk_api.VkApi(token=vk_api_key)
 
     api_vk = vk_session.get_api()
     longpoll = VkLongPoll(vk_session)
-    redis_connect = get_redis_connection()
     books = load_books()
 
     for event in longpoll.listen():
