@@ -17,4 +17,6 @@ redis_pool = redis.ConnectionPool(
     socket_connect_timeout=300,
     health_check_interval=300,
 )
-redis_connect = redis.StrictRedis(connection_pool=redis_pool, db=0)
+redis_connection = redis.StrictRedis(connection_pool=redis_pool, db=0)
+
+

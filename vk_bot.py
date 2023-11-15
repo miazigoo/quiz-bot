@@ -7,7 +7,7 @@ from vk_api.longpoll import VkLongPoll, VkEventType
 
 from handlers.vk_quiz import handle_new_question, handle_give_up, handle_solution_attempt, handle_my_account
 from load_quiz import load_books
-from redis_connection import redis_connect
+from redis_connection import redis_connection
 
 logger = logging.getLogger(__name__)
 
@@ -29,18 +29,18 @@ def main():
             continue
 
         if event.text == 'Новый вопрос':
-            handle_new_question(event, api_vk, redis_connect, books)
+            handle_new_question(event, api_vk, redis_connection, books)
             continue
 
         if event.text == 'Сдаться':
-            handle_give_up(event, api_vk, redis_connect)
+            handle_give_up(event, api_vk, redis_connection)
             continue
 
         if event.text == 'Мой счет':
-            handle_my_account(event, api_vk, redis_connect)
+            handle_my_account(event, api_vk, redis_connection)
             continue
 
-        handle_solution_attempt(event, api_vk, redis_connect)
+        handle_solution_attempt(event, api_vk, redis_connection)
 
 
 if __name__ == "__main__":
